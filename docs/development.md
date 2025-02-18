@@ -45,6 +45,8 @@ Install prerequisites:
     - [Ninja](https://github.com/ninja-build/ninja/releases)
 - (Optional) NVIDIA GPU support
     - [CUDA SDK](https://developer.nvidia.com/cuda-downloads?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_network)
+- (Optional) Vulkan support
+    - [Vulkan SDK](https://vulkan.lunarg.com/sdk/home#windows)
 
 > [!IMPORTANT]
 > Ensure prerequisites are in `PATH` before running CMake.
@@ -66,6 +68,15 @@ Lastly, run Ollama:
 
 ```
 go run . serve
+```
+
+If you are building the Vulkan version, follow these steps:
+
+```
+cmake --preset Vulkan
+cmake --build build --parallel --config Release
+cmake --install build --strip
+go build -ldflags="-s -w" -trimpath -buildmode=pie -o dist/
 ```
 
 ## Windows (ARM)
